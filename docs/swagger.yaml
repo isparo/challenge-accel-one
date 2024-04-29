@@ -1,0 +1,174 @@
+basePath: /api/v1
+definitions:
+  github_com_josue_challenge-accel-one_internal_api_dto.ContactRequest:
+    properties:
+      email:
+        type: string
+      lastName:
+        type: string
+      name:
+        type: string
+      phoneNumber:
+        type: string
+    type: object
+  github_com_josue_challenge-accel-one_internal_api_dto.ContactResponse:
+    properties:
+      email:
+        type: string
+      id:
+        type: string
+      lastName:
+        type: string
+      name:
+        type: string
+      phoneNumber:
+        type: string
+    type: object
+  github_com_josue_challenge-accel-one_internal_shared_errorhandler.TemplateError:
+    properties:
+      error: {}
+      msg:
+        type: string
+      status:
+        type: integer
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: APIs to manage contacts.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Contact API
+  version: "1.0"
+paths:
+  /contact:
+    post:
+      consumes:
+      - application/json
+      description: This endpoint is used to create a new contact
+      parameters:
+      - description: contact info
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_josue_challenge-accel-one_internal_api_dto.ContactRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/github_com_josue_challenge-accel-one_internal_api_dto.ContactResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_josue_challenge-accel-one_internal_shared_errorhandler.TemplateError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_josue_challenge-accel-one_internal_shared_errorhandler.TemplateError'
+      summary: Creates new Contact
+      tags:
+      - Contact
+  /contact/{contactId}:
+    delete:
+      description: Delete Contact by ID
+      parameters:
+      - description: contact ID
+        in: path
+        name: contactId
+        required: true
+        type: string
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_josue_challenge-accel-one_internal_shared_errorhandler.TemplateError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_josue_challenge-accel-one_internal_shared_errorhandler.TemplateError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_josue_challenge-accel-one_internal_shared_errorhandler.TemplateError'
+      summary: Delete Contact by ID
+      tags:
+      - Contact
+    get:
+      description: Get contact by ID
+      parameters:
+      - description: contact ID
+        in: path
+        name: contactId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "202":
+          description: Accepted
+          schema:
+            $ref: '#/definitions/github_com_josue_challenge-accel-one_internal_api_dto.ContactResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_josue_challenge-accel-one_internal_shared_errorhandler.TemplateError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_josue_challenge-accel-one_internal_shared_errorhandler.TemplateError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_josue_challenge-accel-one_internal_shared_errorhandler.TemplateError'
+      summary: Get contact
+      tags:
+      - Contact
+    put:
+      consumes:
+      - application/json
+      description: Updates the Contact
+      parameters:
+      - description: Contact ID
+        in: path
+        name: contactId
+        required: true
+        type: string
+      - description: Contact request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_josue_challenge-accel-one_internal_api_dto.ContactRequest'
+      produces:
+      - application/json
+      responses:
+        "202":
+          description: Accepted
+          schema:
+            $ref: '#/definitions/github_com_josue_challenge-accel-one_internal_api_dto.ContactResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_josue_challenge-accel-one_internal_shared_errorhandler.TemplateError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_josue_challenge-accel-one_internal_shared_errorhandler.TemplateError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_josue_challenge-accel-one_internal_shared_errorhandler.TemplateError'
+      summary: Update Contacts
+      tags:
+      - Contact
+swagger: "2.0"
